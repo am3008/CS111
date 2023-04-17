@@ -1,0 +1,73 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class Sierpinski extends Canvas{
+
+    public int n;
+    public int size;
+    public int[] corx = {0,350,700};
+    public int[] cory = {606,0,606};  
+    public int[] tempx = {0,0,0};
+    public int[] tempy = {0,0,0};
+
+
+    public void paint(Graphics g)
+    {
+        g.drawPolygon(corx,cory,3);
+        int x0 = corx[0];
+        int x1 = corx[1];
+        int x2 = corx[2];
+        int y0 = cory[0];
+        int y1 = cory[1];
+        int y2 = cory[2];
+      
+        corx[0]=(x0+x1)/2;
+        cory[0]=(y0+y1)/2;
+        corx[1]=(x0+x2)/2;
+        cory[1]=(y0+y2)/2;
+        corx[2]=(x1+x2)/2;
+        cory[2]=(y1+y2)/2;
+        
+        g.drawPolygon(corx,cory,3);
+        tempx[0]=(x0+corx[0])/2;
+        tempy[0]=(y0+cory[0])/2;
+        tempx[1]=(x0+corx[2])/2;
+        tempy[1]=(y0+cory[2])/2;
+        tempx[2]=(x0+corx[1])/2;
+        tempy[2]=(y0+cory[1])/2;
+
+
+        g.drawPolygon(tempx,tempy,3);
+        tempx[0]=(x1+corx[0])/2;
+        tempy[0]=(y1+cory[0])/2;
+        tempx[1]=(x1+corx[2])/2;
+        tempy[1]=(y1+cory[2])/2;
+        tempx[2]=(x1+corx[1])/2;
+        tempy[2]=(y1+cory[1])/2;
+        g.drawPolygon(tempx,tempy,3);
+        tempx[0]=(x2+corx[0])/2;
+        tempy[0]=(y2+cory[0])/2;
+        tempx[1]=(x2+corx[2])/2;
+        tempy[1]=(y2+cory[2])/2;
+        tempx[2]=(x2+corx[1])/2;
+        tempy[2]=(y2+cory[1])/2;
+        g.drawPolygon(tempx,tempy,3);
+        paint(g);
+        }
+        
+
+    public static void main(String[] args) 
+    {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Sierpinski drawing = new Sierpinski();
+        drawing.n = 0;
+        drawing.size = 700;
+        drawing.setSize(drawing.size,drawing.size);
+        frame.add(drawing);
+        frame.pack();
+        frame.setVisible(true);
+        
+    }
+    
+}
